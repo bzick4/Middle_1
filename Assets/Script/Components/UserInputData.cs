@@ -34,11 +34,13 @@ public struct InputData : IComponentData
     public float2 Move;
     public float Shoot;
     public float Dash;
+    
 }
 public struct DashData : IComponentData
 {
-    
+   
 }
+
 public struct MoveData : IComponentData
 {
     public float Speed;

@@ -14,7 +14,7 @@ public class CharacterShoot : ComponentSystem
 
     protected override void OnUpdate()
     {
-        Entities.With(_shootQuery).ForEach((Entity entity, UserInputData inputData, ref InputData input) =>
+        Entities.With(_shootQuery).ForEach((UserInputData inputData, ref InputData input) =>
         {
             if (input.Shoot >0f && inputData.ShootAction != null && inputData.ShootAction is IAbility ability)
             {
