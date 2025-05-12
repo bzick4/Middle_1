@@ -20,7 +20,7 @@ public class CharacterDash : ComponentSystem
 
     protected override void OnUpdate()
     {
-        Entities.With(_dashQuery).ForEach((Entity entity, ref Translation translation, ref InputData input) =>
+        Entities.With(_dashQuery).ForEach((Entity entity, ref InputData input) =>
         {
             var inputData = EntityManager.GetComponentObject<UserInputData>(entity);
 
