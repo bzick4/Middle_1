@@ -10,27 +10,28 @@ public class CharacterDash : ComponentSystem
 
     protected override void OnCreate()
     {
-        _dashQuery = GetEntityQuery(ComponentType.ReadOnly<InputData>(),
+        _dashQuery = GetEntityQuery(
+            ComponentType.ReadOnly<InputData>(),
             ComponentType.ReadOnly<DashData>(),
             ComponentType.ReadOnly<UserInputData>(),
-            ComponentType.ReadOnly<Translation>());
-    }
+            ComponentType.ReadOnly<Translation>()
+        );
+}
 
     protected override void OnUpdate()
     {
-                Entities.With(_dashQuery).ForEach((ref UserInputData inputData, ref InputData input, ref Translation translation) =>
-                {
-                if (input.Dash > 0f && input.Move.x != 0f && input.Move.y != 0f && 
-                    inputData.DashAction != null && inputData.DashAction is IDash dash)
-                {
-                    dash.DashExecute();
-                    
-                    var pos = translation.Value;
-                    pos += new float3(input.Move.x * 2, 0, input.Move.y * 2);
-                    translation.Value = pos;
-                }
-                
-                });
+        Entities.With(_dashQuery).ForEach((Entity entity, ref Translation translation, ref InputData input) =>
+        {
+            var inputData = EntityManager.GetComponentObject<UserInputData>(entity);
+
+            if (input.Dash > 0f && input.Move.x != 0f && input.Move.y != 0f &&
+                inputData.DashAction != null && inputData.DashAction is IDash dash)
+            {
+                dash.DashExecute();
+
+               
+            }
+        });
             
         }
     
