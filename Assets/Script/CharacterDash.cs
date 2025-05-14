@@ -20,21 +20,13 @@ public class CharacterDash : ComponentSystem
 
     protected override void OnUpdate()
     {
-        Entities.With(_dashQuery).ForEach((Entity entity, ref InputData input) =>
+       Entities.With(_dashQuery).ForEach((Entity entity, ref InputData input, UserInputData inputData) =>
+    {
+        if (input.Dash > 0f && inputData.DashAction != null && inputData.DashAction is IDash dash) 
         {
-            var inputData = EntityManager.GetComponentObject<UserInputData>(entity);
-
-            if (input.Dash > 0f && input.Move.x != 0f && input.Move.y != 0f &&
-                inputData.DashAction != null && inputData.DashAction is IDash dash)
-            {
-                dash.DashExecute();
-
-               
-            }
-        });
-            
-        }
+            dash.DashExecute(); 
+        } 
+    }); 
+    }
     
 }
-
-// input.Move.x != 0f && input.Move.y != 0f &&

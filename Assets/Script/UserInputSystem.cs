@@ -57,7 +57,7 @@ public class UserInputSystem : ComponentSystem
     protected override void OnUpdate()
     {
         Entities.With(_query).ForEach(
-            (Entity entity, ref InputData inputData) =>
+            (Entity entity, ref InputData inputData, ref DashData dashData) =>
         {
             inputData.Move = _moveInput;
             inputData.Shoot = _shootInput;
