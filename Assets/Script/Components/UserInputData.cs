@@ -9,8 +9,6 @@ public class UserInputData : MonoBehaviour, IConvertGameObjectToEntity
     public MonoBehaviour ShootAction;
     public MonoBehaviour DashAction;
     public float DashDistance = 5f;
-    public float LastDashTime = float.MinValue;
-    public float DashCooldown = 1f;
     
     public void Convert(Entity entity, EntityManager dstManager, GameObjectConversionSystem conversionSystem)
     {
@@ -43,7 +41,6 @@ public struct InputData : IComponentData
 }
 public struct DashData : IComponentData
 {
-    public float DashDistance;
 }
 
 public struct MoveData : IComponentData
