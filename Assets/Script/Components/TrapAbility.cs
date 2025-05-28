@@ -10,12 +10,14 @@ public class TrapAbility : CollisionAbility, ICollisionAbility
     {
         foreach (var target in Collisions)
         {
-            var targetHealth = target?.gameObject?.GetComponent<CharacterHealth>();
+            var targetHealth = target.gameObject.GetComponent<CharacterHealth>();
             if (targetHealth != null)
             {
                 targetHealth.Health -= Damage;
+                Debug.Log(targetHealth.Health);
             }
+          
         }
-        
+        Debug.Log("jhhhhh");
     }
 }

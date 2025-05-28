@@ -24,13 +24,14 @@ public class CollisionSystem : ComponentSystem
         Entities.With(_collisionQuery).ForEach((Entity entity, Transform transform,
             ref ActorColliderData colliderData) =>
         {
-            var gameObject = transform.gameObject.gameObject;
-            float3 position = gameObject.transform.position;
-            Quaternion rotation = gameObject.transform.rotation;
+            var go = transform.gameObject;
+            float3 position = go.transform.position;
+            Quaternion rotation = go.transform.rotation;
             
-            var ability = gameObject.GetComponent<ICollisionAbility>();
+            var ability = go.GetComponent<ICollisionAbility>();
             
-            if (ability == null) return;
+           if (ability == null) return;
+            
             
             ability.Collisions?.Clear();
 
@@ -64,6 +65,7 @@ public class CollisionSystem : ComponentSystem
             if (size > 0)
             {
                 ability.Collisions = _result.ToList();
+                //Debug.Log(ability.Collisions.Count);
                 ability.Execute();
             }
         });
