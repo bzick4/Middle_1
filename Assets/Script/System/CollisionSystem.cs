@@ -26,11 +26,16 @@ public class CollisionSystem : ComponentSystem
         Entities.With(_collisionQuery).ForEach((Entity entity, CollisionAbility ability,
             ref ActorColliderData colliderData) =>
         {
+            
+            if(ability ==null || ability.gameObject == null)
+            { 
+                dstManager.DestroyEntity(entity);
+                return;
+            }
+            
             var go = ability.gameObject;
             float3 position = go.transform.position;
             Quaternion rotation = go.transform.rotation;
-           
-           
             
             ability.collisions?.Clear();
 

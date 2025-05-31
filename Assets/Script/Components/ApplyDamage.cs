@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class ApplyDamage : MonoBehaviour, IAbilityTarget
 {
-   public int Damage=10;
+   public int Damage=20;
    public List<GameObject> Targets { get; set; }
    public void Execute()
    {
@@ -15,6 +15,7 @@ public class ApplyDamage : MonoBehaviour, IAbilityTarget
          if (health != null)
          {
             health.Health -= Damage;
+            Destroy(gameObject);
          }
          
       }

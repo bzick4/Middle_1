@@ -6,8 +6,7 @@ using UnityEngine;
 public class ApplyHealth : MonoBehaviour, IAbilityTarget
 {
    public int Health = 40;
-   private MeshRenderer _meshRenderer => GetComponent<MeshRenderer>();
-   private BoxCollider _boxCollider => GetComponent<BoxCollider>();
+   
    public List<GameObject> Targets { get; set; }
    public void Execute()
    {
@@ -26,8 +25,6 @@ public class ApplyHealth : MonoBehaviour, IAbilityTarget
             else
             {
                health.Health += Health;
-               // _meshRenderer.enabled = false;
-               // _boxCollider.enabled = false;
                Destroy(gameObject);
             }
             
