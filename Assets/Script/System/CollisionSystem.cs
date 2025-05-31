@@ -65,7 +65,7 @@ public class CollisionSystem : ComponentSystem
             {
                 foreach (var result in _result)
                 {
-                    ability?.collisions?.Add(result);
+                    ability.collisions?.Add(result);
                 }
                 
                 ability.Execute();

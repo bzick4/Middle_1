@@ -26,8 +26,8 @@ public class ApplyHealth : MonoBehaviour, IAbilityTarget
             else
             {
                health.Health += Health;
-               _meshRenderer.enabled = false;
-               _boxCollider.enabled = false;
+               // _meshRenderer.enabled = false;
+               // _boxCollider.enabled = false;
                Destroy(gameObject);
             }
             
