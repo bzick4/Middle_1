@@ -1,19 +1,45 @@
 using System.Collections;
 using System.Collections.Generic;
+using Script.Components.Interface;
 using Unity.Entities;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 using Unity.Mathematics;
 
-public class CollisionAbility : MonoBehaviour, IConvertGameObjectToEntity, ICollisionAbility
+public class CollisionAbility : MonoBehaviour, IConvertGameObjectToEntity, IAbility
 {
     public Collider Collider;
-    public List<Collider> Collisions { get; set; }
-    
-    
+    public List<MonoBehaviour> CollisionAction = new List<MonoBehaviour>();
+    public List<IAbilityTarget> AbilityAction = new List<IAbilityTarget>();
+    [HideInInspector] public List<Collider> collisions;
+
+
+    private void Start()
+    {
+        foreach (var action in CollisionAction)
+        {
+            if (action is IAbilityTarget ability)
+            {
+                AbilityAction.Add(ability);
+            }
+            else
+            {
+                Debug.LogError("Collision ability doesn't implement IAbility");
+            }
+        }
+    }
+
     public void Execute()
     {
-        Debug.Log("Hit");
+        foreach (var action in AbilityAction)
+        {
+            action.Targets = new List<GameObject>();
+                collisions.ForEach(c =>
+                {
+                    if (c != null) action.Targets.Add(c.gameObject);
+                });
+               action.Execute();
+        }
     }
 
     public void Convert(Entity entity, EntityManager dstManager, GameObjectConversionSystem conversionSystem)
