@@ -2123,6 +2123,7 @@ MonoBehaviour:
   _BulletSpeed: 10
   Bullet: {fileID: 2303978334327956679, guid: 80f16954a9dfe4ba6ac1cc2302a7842f, type: 3}
   ShootDelay: 2
+  Stats: {fileID: 0}
 --- !u!114 &1857808032
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2163,12 +2164,26 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Settings: {fileID: 11400000, guid: 9ad5f6cd621b347a6a40d0b115dd24a8, type: 2}
-  Health: 100
+  HealthStats: {fileID: 1857808040}
 --- !u!4 &1857808039 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8383078712774200623, guid: 5e9e6f046f2ec9f479a142a14ec15809, type: 3}
   m_PrefabInstance: {fileID: 331300691}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1857808040
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1857808026}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0ecc3a89b47a94db89ff8f18771bc217, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ShotCount: 0
+  setting: {fileID: 11400000, guid: 9ad5f6cd621b347a6a40d0b115dd24a8, type: 2}
 --- !u!1 &2142074851
 GameObject:
   m_ObjectHideFlags: 0

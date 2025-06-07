@@ -1,4 +1,5 @@
 
+using System;
 using UnityEngine;
 
 public class ShootAbility : MonoBehaviour, IAbility
@@ -9,6 +10,23 @@ public class ShootAbility : MonoBehaviour, IAbility
     public float ShootDelay;
 
     private float _shootTime = float.MinValue;
+
+    public PlayerStats Stats;
+    
+    private void Start()
+    {
+        Stats = new PlayerStats();
+        var jsonString = PlayerPrefs.GetString("Stats");
+        if (jsonString.Equals(String.Empty, StringComparison.Ordinal))
+        {
+            Stats = JsonUtility.FromJson<PlayerStats>(jsonString);
+        }
+        else
+        {
+            Stats = new PlayerStats();
+        }
+    }
+    
     
     public void Execute()
     {
@@ -18,7 +36,6 @@ public class ShootAbility : MonoBehaviour, IAbility
         
         if (Bullet != null)
         {
-           
             var newBullet = Instantiate(Bullet, _FirePoint.position, _FirePoint.rotation);
             
             Rigidbody rb =  newBullet.GetComponent<Rigidbody>();
@@ -26,6 +43,8 @@ public class ShootAbility : MonoBehaviour, IAbility
             {
                 rb.velocity = _FirePoint.forward * _BulletSpeed;
             }
+            Stats.ShotCount++;
+            
         }
         else
         {

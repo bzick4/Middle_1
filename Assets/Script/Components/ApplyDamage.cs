@@ -5,17 +5,21 @@ using UnityEngine;
 
 public class ApplyDamage : MonoBehaviour, IAbilityTarget
 {
+   private PlayerStats _health;
    public int Damage=20;
    public List<GameObject> Targets { get; set; }
    public void Execute()
    {
       foreach (var target in Targets)
       {
-         var health = target.GetComponent<CharacterHealth>();
-         if (health != null)
+         var _health = target.GetComponent<CharacterHealth>();
+         if (_health != null)
          {
-            health.Health -= Damage;
+            _health.Health -= Damage;
+            // _health.Health;
             Destroy(gameObject);
+            
+            
          }
          
       }

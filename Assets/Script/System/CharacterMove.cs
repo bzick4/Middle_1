@@ -16,13 +16,21 @@ public class CharacterMove : ComponentSystem
 
     protected override void OnUpdate()
     {
-        Entities.With(_moveQuery).ForEach((Transform transform, ref InputData inputData, ref MoveData move) =>
+        Entities.With(_moveQuery).ForEach((Entity entity,Transform transform, ref InputData inputData, ref MoveData move) =>
         {
+            var dstManager = World.DefaultGameObjectInjectionWorld.EntityManager;
+            
             var direction = new Vector3(inputData.Move.x, 0, inputData.Move.y);
 
             if (direction != Vector3.zero)
             {
-                // Обновляем позицию
+                
+                if(transform ==null || transform.gameObject == null)
+                { 
+                    dstManager.DestroyEntity(entity);
+                    return;
+                }
+               
                 var pos = transform.position;
                 pos += direction * move.Speed;
                 transform.position = pos;
