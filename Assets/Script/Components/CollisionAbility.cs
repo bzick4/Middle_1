@@ -34,11 +34,11 @@ public class CollisionAbility : MonoBehaviour, IConvertGameObjectToEntity, IAbil
         foreach (var action in AbilityAction)
         {
             action.Targets = new List<GameObject>();
-                collisions.ForEach(c =>
-                {
-                    if (c != null) action.Targets.Add(c.gameObject);
-                });
-               action.Execute();
+            collisions.ForEach(c =>
+            {
+                if (c != null) action.Targets.Add(c.gameObject);
+            });
+            action.Execute();
         }
     }
 
@@ -83,7 +83,7 @@ public class CollisionAbility : MonoBehaviour, IConvertGameObjectToEntity, IAbil
                 });
                 break;
         }
-        
+
         Collider.enabled = false;
 
     }

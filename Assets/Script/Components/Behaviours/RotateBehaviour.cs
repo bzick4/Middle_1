@@ -16,7 +16,7 @@ public class RotateBehaviour : MonoBehaviour, IBehaviour
     {
         if (characterHealth == null) return 0;
         
-        return 1 / (this.gameObject.transform.position - characterHealth.transform.position).magnitude;
+        return 3 / (this.gameObject.transform.position - characterHealth.transform.position).magnitude;
     }
 
     public void Behave()
