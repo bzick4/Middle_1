@@ -87,7 +87,6 @@ public class CollisionAbility : MonoBehaviour, IConvertGameObjectToEntity, IAbil
         Collider.enabled = false;
 
     }
-
     
 }
 
