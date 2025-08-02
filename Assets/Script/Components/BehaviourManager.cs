@@ -8,12 +8,6 @@ public class BehaviourManager : MonoBehaviour, IConvertGameObjectToEntity
     public List<MonoBehaviour> Behaviours;
     public IBehaviour activeBehavior;
 
-    void Start()
-    {
-        
-    }
-
-
     public void Convert(Entity entity, EntityManager dstManager, GameObjectConversionSystem conversionSystem)
     {
         dstManager.AddComponent<AIAgent>(entity);

@@ -25,7 +25,7 @@ private void Update()
     {
         PlayerStatsData save = new PlayerStatsData
         {
-            Health = Setting.HeroHealth
+            Health = Setting._HeroHealth
         };
         string json = JsonUtility.ToJson(save);
 
@@ -40,7 +40,7 @@ private void Update()
 
         PlayerStatsData data = JsonUtility.FromJson<PlayerStatsData>(json);
        
-        Setting.HeroHealth = data.Health;
+        Setting._HeroHealth = data.Health;
 
         Debug.Log("Load: " + data.Health);
     }
@@ -52,13 +52,13 @@ private void Update()
         if (Input.GetKeyDown(KeyCode.L))
         {
             Load();
-            Debug.Log("Load" + Setting.HeroHealth + file);
+            Debug.Log("Load" + Setting._HeroHealth + file);
         }
 
         if (Input.GetKeyDown(KeyCode.K))
         {
             Save();
-            Debug.Log("Save" + Setting.HeroHealth + file);
+            Debug.Log("Save" + Setting._HeroHealth + file);
         }
     }
 

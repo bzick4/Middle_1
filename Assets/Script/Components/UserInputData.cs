@@ -50,6 +50,11 @@ public struct MoveData : IComponentData
 
 public struct ShootData : IComponentData
 {
-    
+
 }
 
+public struct BulletMoveData : IComponentData
+{
+    public float3 Direction;
+    public float Speed;
+}

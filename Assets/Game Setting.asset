@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 009555de02f5344669e2e21b6cc35204, type: 3}
   m_Name: Game Setting
   m_EditorClassIdentifier: 
-  HeroHealth: 100
+  HeroHealth: 1000

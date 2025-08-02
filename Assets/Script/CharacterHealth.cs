@@ -31,12 +31,12 @@ public class CharacterHealth : MonoBehaviour
 
     private void WriteStatistics()
     {
-        Settings.HeroHealth = _health;
+        Settings._HeroHealth = _health;
     }
 
     private void Awake()
     {
-        _health = Settings.HeroHealth;
+        _health = Settings._HeroHealth;
        
     }
 
@@ -49,9 +49,9 @@ public class CharacterHealth : MonoBehaviour
             _healthBar.fillAmount = _health / 100f;
         }
         
-        if (_health != Settings.HeroHealth)
+        if (_health != Settings._HeroHealth)
     {
-        _health = Settings.HeroHealth;
+        _health = Settings._HeroHealth;
     }
 
     }
