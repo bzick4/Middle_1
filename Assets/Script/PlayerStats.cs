@@ -69,7 +69,12 @@ private void Update()
 }
 
 [System.Serializable]
-public class PlayerStatsData
+public class PlayerStatsData: IPlayerStats
 {
     public float Health;
+}
+
+public interface IPlayerStats
+{
+
 }

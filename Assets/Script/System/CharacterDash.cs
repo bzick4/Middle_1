@@ -14,7 +14,8 @@ public class CharacterDash : ComponentSystem
             ComponentType.ReadOnly<InputData>(),
             ComponentType.ReadOnly<DashData>(),
             ComponentType.ReadOnly<UserInputData>(),
-            ComponentType.ReadOnly<Translation>()
+            ComponentType.ReadOnly<Translation>(),
+            ComponentType.ReadOnly<InvisibleData>()
         );
 }
 
@@ -22,10 +23,14 @@ public class CharacterDash : ComponentSystem
     {
        Entities.With(_dashQuery).ForEach((Entity entity, ref InputData input, UserInputData inputData) =>
     {
-        if (input.Dash > 0f && inputData.DashAction != null && inputData.DashAction is IDash dash) 
+        if (input.Dash > 0f && inputData.DashAction != null && inputData.DashAction is IDash dash)
         {
-            dash.DashExecute(); 
+            dash.DashExecute();
         } 
+        if (input.Invis > 0f && inputData.InvisAction != null && inputData.InvisAction is IAbility invis)
+        {
+            invis.Execute();
+        }
     }); 
     }
     

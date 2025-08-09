@@ -12,4 +12,3 @@ public interface IHealthConfig
 {
     float HeroHealth { get; }
 }
-

@@ -10,10 +10,12 @@ public class UserInputSystem : ComponentSystem
     private InputAction _moveAction;
     private InputAction _shootAction;
     private InputAction _dashAction;
+    private InputAction _invisAction;
     
     private float2 _moveInput;
     private float _shootInput;
     private float _dashInput;
+    private float _invisInput;
 
     protected override void OnCreate()
     {
@@ -28,23 +30,29 @@ public class UserInputSystem : ComponentSystem
             .With("Down", "<Keyboard>/s")
             .With("Left", "<Keyboard>/a")
             .With("Right", "<Keyboard>/d");
-        
+
         _moveAction.performed += context => { _moveInput = context.ReadValue<Vector2>(); };
         _moveAction.started += context => { _moveInput = context.ReadValue<Vector2>(); };
         _moveAction.canceled += context => { _moveInput = context.ReadValue<Vector2>(); };
         _moveAction.Enable();
-        
+
         _shootAction = new InputAction("shoot", binding: "<Keyboard>/Space");
         _shootAction.performed += context => { _shootInput = context.ReadValue<float>(); };
         _shootAction.started += context => { _shootInput = context.ReadValue<float>(); };
         _shootAction.canceled += context => { _shootInput = context.ReadValue<float>(); };
         _shootAction.Enable();
-        
+
         _dashAction = new InputAction("dash", binding: "<Keyboard>/E");
         _dashAction.performed += context => { _dashInput = context.ReadValue<float>(); };
         _dashAction.started += context => { _dashInput = context.ReadValue<float>(); };
         _dashAction.canceled += context => { _dashInput = context.ReadValue<float>(); };
         _dashAction.Enable();
+
+        _invisAction = new InputAction("invis", binding: "<Keyboard>/Q");
+        _invisAction.performed += context => { _invisInput = context.ReadValue<float>(); };
+        _invisAction.started += context => { _invisInput = context.ReadValue<float>(); };
+        _invisAction.canceled += context => { _invisInput = context.ReadValue<float>(); };
+        _invisAction.Enable();
     }
 
     protected override void OnStopRunning()
@@ -52,6 +60,7 @@ public class UserInputSystem : ComponentSystem
         _moveAction.Disable();
         _shootAction.Disable();
         _dashAction.Disable();
+        _invisAction.Disable();
     }
     
     protected override void OnUpdate()
@@ -62,6 +71,7 @@ public class UserInputSystem : ComponentSystem
             inputData.Move = _moveInput;
             inputData.Shoot = _shootInput;
             inputData.Dash = _dashInput;
+            inputData.Invis = _invisInput;
         });
     }
 }

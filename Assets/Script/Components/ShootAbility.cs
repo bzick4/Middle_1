@@ -3,7 +3,7 @@ using System;
 using Unity.Entities;
 using UnityEngine;
 
-public class ShootAbility : MonoBehaviour, IAbility, IConvertGameObjectToEntity
+public class ShootAbility : MonoBehaviour, IAbility //IConvertGameObjectToEntity
 {
     [SerializeField] private Transform _FirePoint;
     [SerializeField] private float _BulletSpeed = 10;
@@ -49,25 +49,25 @@ public class ShootAbility : MonoBehaviour, IAbility, IConvertGameObjectToEntity
         }
     
         
-        // if (Time.time < _shootTime + ShootDelay) return;
-        // _shootTime = Time.time;
+        if (Time.time < _shootTime + ShootDelay) return;
+        _shootTime = Time.time;
 
-        // if (Bullet != null)
-        // {
-        //     var newBullet = Instantiate(Bullet, _FirePoint.position, _FirePoint.rotation);
+        if (Bullet != null)
+        {
+            var newBullet = Instantiate(Bullet, _FirePoint.position, _FirePoint.rotation);
 
-        //     Rigidbody rb = newBullet.GetComponent<Rigidbody>();
-        //     if (rb != null)
-        //     {
-        //         rb.velocity = _FirePoint.forward * _BulletSpeed;
-        //     }
-        //     Stats.ShotCount++;
+            Rigidbody rb = newBullet.GetComponent<Rigidbody>();
+            if (rb != null)
+            {
+                rb.velocity = _FirePoint.forward * _BulletSpeed;
+            }
+            Stats.ShotCount++;
 
-        // }
-        // else
-        // {
-        //     Debug.LogError("[SHOOT ABILITY] bullet prefab is not assigned.");
-        // }
+        }
+        else
+        {
+            Debug.LogError("[SHOOT ABILITY] bullet prefab is not assigned.");
+        }
     }
 
     public void Convert(Entity entity, EntityManager dstManager, GameObjectConversionSystem conversionSystem)

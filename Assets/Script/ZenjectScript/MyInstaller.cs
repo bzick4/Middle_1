@@ -1,11 +1,19 @@
+using System.ComponentModel;
 using UnityEngine;
 using Zenject;
 
 public class MyInstaller : MonoInstaller
 {
+
+    [SerializeField] private PlayerStats _PlayerStats;
+    [SerializeField] private bool _IsDummyStats;
+
     public override void InstallBindings()
     {
-        Container.Bind<string>().FromInstance("INJECT");
+        //IPlayerStats stats = _IsDummyStats ? new PlayerStatsDummy() : _PlayerStats;
+       // Container.Bind<IPlayerStats>().FromInstance(stats).AsSingle().NonLazy();
+
+        // Container.Bind<string>().FromInstance("INJECT");
         Container.Bind<GreetMe>().AsSingle().NonLazy();
         Container.Bind<ITest>().To<Test1>().AsSingle().NonLazy();
     }
@@ -23,7 +31,7 @@ public class Test1 : ITest
 {
     public void Echo()
     {
-        Debug.Log("Test1");
+        Debug.Log("aaaa");
     }
 }
 

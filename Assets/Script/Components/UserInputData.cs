@@ -8,6 +8,8 @@ public class UserInputData : MonoBehaviour, IConvertGameObjectToEntity
     
     public MonoBehaviour ShootAction;
     public MonoBehaviour DashAction;
+    public MonoBehaviour InvisAction;
+
     public float DashDistance = 5f;
     
     public void Convert(Entity entity, EntityManager dstManager, GameObjectConversionSystem conversionSystem)
@@ -28,6 +30,13 @@ public class UserInputData : MonoBehaviour, IConvertGameObjectToEntity
             dstManager.AddComponentData(entity, new DashData());
         }
         
+        if (InvisAction != null && InvisAction is IAbility)
+        {
+            dstManager.AddComponentData(entity, new InvisibleData());
+
+        }
+        
+        
         dstManager.AddComponentObject(entity, this);
     }
 }
@@ -37,6 +46,8 @@ public struct InputData : IComponentData
     public float2 Move;
     public float Shoot;
     public float Dash;
+    public float Invis;
+
     
 }
 public struct DashData : IComponentData
@@ -57,4 +68,9 @@ public struct BulletMoveData : IComponentData
 {
     public float3 Direction;
     public float Speed;
+}
+
+public struct InvisibleData : IComponentData
+{
+
 }
