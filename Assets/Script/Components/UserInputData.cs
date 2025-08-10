@@ -68,6 +68,7 @@ public struct BulletMoveData : IComponentData
 {
     public float3 Direction;
     public float Speed;
+    public bool Active;
 }
 
 public struct InvisibleData : IComponentData

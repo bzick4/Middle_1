@@ -2,6 +2,8 @@
 using System;
 using System.Collections;
 using Unity.Entities;
+using Unity.Mathematics;
+using Unity.Transforms;
 using UnityEngine;
 
 public class ShootAbility : MonoBehaviour, IAbility //IConvertGameObjectToEntity
@@ -9,7 +11,8 @@ public class ShootAbility : MonoBehaviour, IAbility //IConvertGameObjectToEntity
     [SerializeField] private Transform _FirePoint;
     [SerializeField] private float _BulletSpeed = 10;
     [SerializeField] private ParticleSystem _ParticleSystem;
-    public GameObject Bullet;
+   //public GameObject Bullet;
+    private PoolObject _BulletPool => FindObjectOfType<PoolObject>();
 
     public float ShootDelay;
 
@@ -74,35 +77,28 @@ public class ShootAbility : MonoBehaviour, IAbility //IConvertGameObjectToEntity
 
         if (Time.time < _shootTime + ShootDelay) return;
         _shootTime = Time.time;
-        
+
         _ParticleSystem.Play();
 
-        // if (Bullet != null)
-        // {
+        GameObject bullet = _BulletPool.GetObject();
 
-        //     var newBullet = Instantiate(Bullet, _FirePoint.position, _FirePoint.rotation);
-
-        //     Rigidbody rb = newBullet.GetComponent<Rigidbody>();
-        //     if (rb != null)
-        //     {
-        //         rb.velocity = _FirePoint.forward * _BulletSpeed;
-        //     }
-        //     Stats.ShotCount++;
-
-        // }
-        // else
-        // {
-        //     Debug.LogError("[SHOOT ABILITY] bullet prefab is not assigned.");
-        // }
+        bullet.transform.position = _FirePoint.position;
+        bullet.transform.rotation = _FirePoint.rotation;
 
 
-        // public void Convert(Entity entity, EntityManager dstManager, GameObjectConversionSystem conversionSystem)
-        // {
-        //     bulletPrefabEntity = conversionSystem.GetPrimaryEntity(Bullet);
-        //     dstManager.AddComponentObject(entity, this);
-        //     Debug.Log("Bullet: " + Bullet);
-        //     Debug.Log("bulletPrefabEntity: " + bulletPrefabEntity);
+        Rigidbody rb = bullet.GetComponent<Rigidbody>();
+        if (rb != null)
+        {
+            rb.velocity = _FirePoint.up * _BulletSpeed;
+        }
 
-        // }
+        StartCoroutine(ReturnBulletToPool(bullet, 2f));
+
+    }
+    
+    private IEnumerator ReturnBulletToPool(GameObject bullet, float delay)
+    {
+        yield return new WaitForSeconds(0.9f);
+        _BulletPool.ReturnObject(bullet);
     }
 }

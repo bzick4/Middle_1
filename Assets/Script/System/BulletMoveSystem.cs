@@ -13,21 +13,36 @@ public class BulletMoveSystem : ComponentSystem
 
     protected override void OnUpdate()
     {
-        var entities = _shootQuery.ToEntityArray(Unity.Collections.Allocator.TempJob);
-        var translations = _shootQuery.ToComponentDataArray<Translation>(Unity.Collections.Allocator.TempJob);
-        var moves = _shootQuery.ToComponentDataArray<BulletMoveData>(Unity.Collections.Allocator.TempJob);
 
-        for (int i = 0; i < entities.Length; i++)
+        float deltaTime = Time.DeltaTime;
+        Entities.ForEach((ref Translation pos, ref BulletMoveData bullet) =>
         {
-            var translation = translations[i];
-            var moveData = moves[i];
+            if (bullet.Active)
+            {
+                pos.Value += bullet.Direction * bullet.Speed * deltaTime;
 
-            translation.Value += moveData.Direction * moveData.Speed * Time.DeltaTime;
-            EntityManager.SetComponentData(entities[i], translation);
-        }
+                if (pos.Value.y > 20)
+                {
+                    bullet.Active = false;
+                    pos.Value.y = -9999;
+                }
+            }
+        });
+        // var entities = _shootQuery.ToEntityArray(Unity.Collections.Allocator.TempJob);
+        // var translations = _shootQuery.ToComponentDataArray<Translation>(Unity.Collections.Allocator.TempJob);
+        // var moves = _shootQuery.ToComponentDataArray<BulletMoveData>(Unity.Collections.Allocator.TempJob);
 
-        entities.Dispose();
-        translations.Dispose();
-        moves.Dispose();
+        // for (int i = 0; i < entities.Length; i++)
+        // {
+        //     var translation = translations[i];
+        //     var moveData = moves[i];
+
+        //     translation.Value += moveData.Direction * moveData.Speed * Time.DeltaTime;
+        //     EntityManager.SetComponentData(entities[i], translation);
+        // }
+
+        // entities.Dispose();
+        // translations.Dispose();
+        // moves.Dispose();
     }
 }
