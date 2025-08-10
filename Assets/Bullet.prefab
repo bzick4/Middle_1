@@ -127,7 +127,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Collider: {fileID: 6594744905544191396}
-  CollisionAction: []
+  CollisionAction:
+  - {fileID: 5484862039533814165}
   collisions: []
 --- !u!114 &5484862039533814165
 MonoBehaviour:
